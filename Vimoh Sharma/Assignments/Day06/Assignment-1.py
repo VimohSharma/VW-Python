@@ -29,6 +29,7 @@ class CompanyAcquisition(Company):
         print("Merged Final Employee Data")
         for emp in self.employees:
             emp.show_details()
+            print("----------------------------")
 
 class NewEmployee(Employee):
     def __init__(self, emp_id, emp_name, designation,joining_date,previous_company):
@@ -79,31 +80,38 @@ class Intern(NewEmployee):
 
 class HRManager(Manager, HR):
     def __init__(self, emp_id, emp_name, designation, joining_date, previous_company, team_size, policies_handled):
-        super().__init__(emp_id, emp_name, designation, joining_date, previous_company, team_size)
-        self.team_size=team_size
-        self.policies_handled=policies_handled
+        # Initialize NewEmployee directly (same as DeveloperIntern!)
+        NewEmployee.__init__(self, emp_id, emp_name, designation, joining_date, previous_company)
+        
+        # Set attributes manually
+        self.team_size = team_size
+        self.policies_handled = policies_handled
 
     def show_details(self):
-        super().show_details()
+        NewEmployee.show_details(self)
         print(f"Team Size: {self.team_size}")
         print(f"Policies Handled: {self.policies_handled}")
         
 
 class DeveloperIntern(Developer, Intern):
     def __init__(self, emp_id, emp_name, designation, joining_date, previous_company, programming_languages, duration):
-        # Explicitly call the constructors of both Developer and Intern
-        Developer.__init__(self, emp_id, emp_name, designation, joining_date, previous_company, programming_languages)
-        Intern.__init__(self, emp_id, emp_name, designation, joining_date, previous_company, duration)
+
+        NewEmployee.__init__(self, emp_id, emp_name, designation, joining_date, previous_company)
+        
+        self.programming_languages = programming_languages
+        self.duration = duration
 
     def show_details(self):
-        super().show_details()  # Calls show_details from Developer and Intern in the correct order (based on MRO)
-        print(f"Internship Duration: {self.duration}")
+        NewEmployee.show_details(self)
         print(f"Programming Languages: {', '.join(self.programming_languages)}")
+        print(f"Internship Duration: {self.duration}")
 
 class ManagerNew(HR, NewEmployee):
     def __init__(self, emp_id, emp_name, designation, joining_date, previous_company, policies_handled,team_size):
-        super().__init__(emp_id, emp_name, designation, joining_date, previous_company, policies_handled)
-        self.team_size=team_size
+        NewEmployee.__init__(self, emp_id, emp_name, designation,
+                    joining_date, previous_company)
+        self.team_size = team_size
+        self.policies_handled = policies_handled
 
     def show_details(self):
         super().show_details()
