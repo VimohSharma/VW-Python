@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move Car</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        #road {
+            width: 100%;
+            height: 200px;
+            background-color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #car {
+            position: absolute;
+            bottom: 10px; 
+            left: 0;
+            width: 100px;
+            height: 50px;
+            background-image: url("https://cdn-icons-png.flaticon.com/512/743/743131.png"); /* Example car image */
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        button {
+            position: absolute;
+            top: 220px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div id="road">
+    <div id="car"></div>
+</div>
+
+<button onclick="moveCar()">Move Car</button>
+
+<script>
+    let carPosition = 0;
+
+    function moveCar() {
+        const car = document.getElementById('car');
+        
+        carPosition += 10;
+
+        car.style.left = carPosition + 'px';
+
+        if (carPosition > window.innerWidth) {
+            carPosition = 0;
+            car.style.left = carPosition + 'px';
+        }
+    }
+</script>
+
+</body>
+</html>

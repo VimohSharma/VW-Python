@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <style>
+        #msg{
+            transition: all 0.3s ease;
+        }
+        .birthday_container{
+            font-size:40px;
+            font-weight:bold;
+            color:white;
+            background: linear-gradient(45deg, rgb(195, 73, 93), rgb(193, 71, 193), rgb(218, 160, 53));
+            padding:20px;
+            text-align: center;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h4>There is a message for you!!</h4>
+    <p id="msg">wait..</p>
+    <button onclick="showMessage()">Click here to get it!</button>
+
+    <div id="gif"></div>
+    <script>
+        let cnt=0;
+        let size=16;
+
+        function RandomColor(){
+            return "#" + Math.floor(Math.random()*16777215).toString(16);
+        }
+        function showMessage(){
+        const p = document.getElementById("msg");
+        cnt++;
+            if (cnt > 4) 
+            {
+                p.removeAttribute("style");
+                p.className = "birthday_container";
+                p.innerHTML = "Happy Birthday to you!!";
+                document.getElementById("gif").innerHTML = 
+                `<img src="https://media.giphy.com/media/3o6Ztpg1w2M9J4cZVq/giphy.gif" alt="Happy Birthday" />`;
+            }
+            else {
+                size += 20;
+                p.style.fontSize = size + "px";
+                p.style.color = RandomColor();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulb</title>
+    <style>
+    #bulb{
+        width:150px;
+        height:150px;
+        background: grey;
+        border-radius:50%;
+        margin:auto;
+        transition:0.3s ease;
+    }
+       .on{
+        background: yellow;
+        box-shadow: 0 0 40px yellow;
+    }
+</style>
+</head>
+<body>
+    <h2>BULB</h2>
+    <img id ="bulb" src="" alt="">
+
+    <br>
+
+    <button onclick="turnOn()">Turn ON</button>
+    <button onclick="turnOff()">Turn OFF</button>
+<script>
+    function turnOn(){
+        document.getElementById("bulb").classList.add("on");
+    }
+
+    function turnOff(){
+        document.getElementById("bulb").classList.remove("on");
+    }
+</script>
+</body>
+</html>
