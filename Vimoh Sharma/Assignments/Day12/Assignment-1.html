@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Animation</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #eee;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        button {
+            margin: 20px;
+            padding: 12px 25px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .road {
+            position: relative;
+            width: 90%;
+            height: 300px;
+            margin: auto;
+            background: #bdbdbd;
+            border-top: 4px solid black;
+            border-bottom: 4px solid black;
+            overflow: hidden;
+        }
+
+        .car {
+            position: absolute;
+            width: 100px;
+            top: 80px;
+            transition: 0.15s linear;
+        }
+
+        #car1 {
+            left: 0;
+        }
+
+        #car2 {
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<button onclick="moveStep()">Next Step</button>
+
+<div class="road" id="road">
+    <img src="car.png" id="car1" class="car">
+    <img src="car (1).png" id="car2" class="car">
+</div>
+
+<script>
+
+let car1 = document.getElementById("car1");
+let car2 = document.getElementById("car2");
+let road = document.getElementById("road");
+
+let pos1 = 0;
+let pos2 = road.clientWidth - 120;
+
+let topPos = 80;
+
+let state = "towards";
+
+car2.style.left = pos2 + "px";
+
+function moveStep() {
+
+    if (state === "towards") {
+
+        pos1 += 50;
+        pos2 -= 50;
+
+        car1.style.left = pos1 + "px";
+        car2.style.left = pos2 + "px";
+
+        // collision detection
+        if (pos1 + 100 >= pos2) {
+            state = "down";
+        }
+    }
+
+    else if (state === "down") {
+
+        topPos += 20;
+
+        car1.style.top = topPos + "px";
+        car2.style.top = topPos + "px";
+
+        if (topPos >= 160) {
+            state = "away";
+        }
+    }
+
+    else if (state === "away") {
+
+        pos1 -= 50;
+        pos2 += 50;
+
+        car1.style.left = pos1 + "px";
+        car2.style.left = pos2 + "px";
+    }
+}
+
+</script>
+
+</body>
+</html>
