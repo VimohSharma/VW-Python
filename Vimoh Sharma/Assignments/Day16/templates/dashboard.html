@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - {{ role|capitalize }}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f8;
+        }
+
+        .header {
+            background: #1e293b;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .role-badge {
+            background: #3b82f6;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .nav {
+            background: white;
+            padding: 10px 30px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th {
+            background: #f1f5f9;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .btn-delete {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-delete:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <h2>Company Dashboard</h2>
+    <div class="role-badge">{{ role|capitalize }}</div>
+</div>
+
+<!-- Navigation based on role -->
+<div class="nav">
+    {% if role == "admin" %}
+        <a href="#">Users</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+    {% elif role == "manager" %}
+        <a href="#">Team</a>
+        <a href="#">Reports</a>
+    {% else %}
+        <a href="#">Profile</a>
+        <a href="#">Tasks</a>
+    {% endif %}
+</div>
+
+<div class="container">
+    <div class="card">
+
+        <h3>Employee List</h3>
+
+        <table>
+            <tr>
+                <th>Name</th>
+
+                {% if role != "employee" %}
+                    <th>Salary</th>
+                {% endif %}
+
+                {% if role == "admin" %}
+                    <th>Action</th>
+                {% endif %}
+            </tr>
+
+            {% for emp in employees %}
+            <tr>
+                <td>{{ emp.name }}</td>
+
+                {% if role != "employee" %}
+                    <td>₹ {{ emp.salary }}</td>
+                {% endif %}
+
+                {% if role == "admin" %}
+                    <td>
+                        <button class="btn-delete">Delete</button>
+                    </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

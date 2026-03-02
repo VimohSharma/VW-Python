@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students Table</title>
+</head>
+<body>
+
+<h2>Student Details</h2>
+
+<table border="1">
+    <tr>
+        <th>Student Name</th>
+        <th>Marks</th>
+        <th>Result</th>
+    </tr>
+
+    {% for s in students %}
+    <tr>
+        <td>{{ s.name }}</td>
+        <td>{{ s.marks }}</td>
+
+        <td>
+            {% if s.marks >= 50 %}
+                Pass
+            {% else %}
+                Fail
+            {% endif %}
+        </td>
+
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>

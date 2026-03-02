@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+</head>
+<body>
+
+<h2>Product List</h2>
+
+<p>Total Products: {{ count }}</p>
+
+{% if products %}
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Available</th>
+    </tr>
+
+    {% for p in products %}
+    <tr>
+        <td>{{ p.name }}</td>
+        <td>{{ p.category }}</td>
+        <td>{{ p.price }}</td>
+        <td>{{ p.available }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% else %}
+<h3>No products found</h3>
+{% endif %}
+
+</body>
+</html>
